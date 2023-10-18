@@ -1,23 +1,49 @@
-'use client'
-import React from 'react'
+'use client';
+import axios from "axios";
+import React from 'react';
 import { Dialog, 
         DialogContent, 
         DialogHeader, 
         DialogTrigger, 
         DialogTitle, 
         DialogDescription, 
-    } from './ui/dialog'
-import { Input } from './ui/input'    
-import { Plus } from 'lucide-react'
-import { Button } from './ui/button'
+    } from './ui/dialog';
+import { Input } from './ui/input';    
+import { Plus } from 'lucide-react';
+import { Button } from './ui/button';
+import { useMutation } from '@tanstack/react-query';
 
-type Props = {}
-
+type Props = {};
 
 const CreateNoteDialog = (props: Props) => {
-
 const [input, setInput] = React.useState("");
- 
+
+const createNotebook = useMutation({
+    mutationFn: async () => {
+        const response = await axios.post('/api/createNotebook', {
+        name:input,
+        });
+        return response.data;
+    },
+});
+
+const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (input === '') {
+        window.alert('Please enter a name for your notebook')
+        return
+    }
+    createNotebook.mutate(undefined , {
+        onSuccess: () => {
+            console.log('Success, note created!')
+        },
+        onError: (error) => {
+            console.error(error);
+        },
+    });
+};
+
+
     
   return (
 <Dialog>
