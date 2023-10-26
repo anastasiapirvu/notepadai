@@ -48,7 +48,7 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
   return (
 <Dialog>
     <DialogTrigger>
-        <div className="border-dashed border-2 flex border-green-600 h-full rounded-lg items-center sm:flex-col hover:shadow-xl transition hover:-translate-y-1 flex-row p-4">
+    <div className="border-dashed border-2 flex border-green-600 h-full rounded-lg items-center justify-center sm:flex-col hover:shadow-xl transition hover:-translate-y-1 flex-row p-4">
             <Plus className="w-6 h-6 text-green-600" strokeWidth={3}></Plus>
             <h2 className="font-semibold text-green-600 sm:mt-2">New Note Book</h2>
         </div>
